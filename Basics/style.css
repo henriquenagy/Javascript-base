@@ -1,17 +1,97 @@
-/* RESET */
+/* ======================== 
+CSS PATTERN 2025 - por nagydzn (Revisado) 
+=================================================== */
 @charset "UTF-8";
 * {
  margin: 0;
  padding: 0;
  box-sizing: border-box;
- text-decoration: none;
- font-family: Arial, Helvetica, sans-serif;
 }
-html,
+html {
+ scroll-behavior: smooth;
+ font-size: 100%;
+}
+
 body {
  width: 100%;
- overflow-x: hidden;
- font-size: 100%;
+ font: var(--peso-normal) var(--tamanho-texto-p) / var(--altura-linha-p) var(--fonte-padrao); /* Atalho para: weight, size / line-height, family */
+ color: var(--cor-texto);
+ background-color: var(--cor-fundo);
+}
+
+/* ======================== 
+VARIÁVEIS GLOBAIS (:ROOT)   
+=================================================== */
+:root {
+ /* Cores */
+ --cor-primaria: #b0884e;
+ --cor-fundo: #f4efe4;
+ --cor-texto: #1b1b1b;
+ --cor-branca: #ffffff;
+ --cor-preta: #000000;
+ --cor-cinza: #d9d9d9;
+ --cor-links: #351ad0; /* Cor para links, pode ser a primária */
+
+ /* Alturas e Espaçamentos */
+ --altura-header: 4.5rem;
+
+ /* Tipografia */
+ --fonte-padrao: 'Roboto', sans-serif; /* Fonte para textos gerais */
+ --fonte-titulos: 'Oxanium', sans-serif; /* Fonte para títulos */
+ --peso-leve: 300; /* Checar se incluir o peso no HTML da fonte */
+ --peso-normal: 400;
+ --peso-negrito: 700;
+
+ --tamanho-texto-p: 1rem; /* 16px */
+ --altura-linha-p: 1.6; /* 160% */
+ --tamanho-titulo-h1: 2.5rem; /* 40px */
+ --altura-linha-h1: 1.2; /* 120% */
+}
+
+/* ===================================================
+ESTILOS DE TEXTO PADRÃO
+=================================================== */
+h1,
+h2,
+h3,
+h4 {
+ font-family: var(--fonte-titulos);
+ font-weight: var(--peso-negrito);
+ line-height: var(--altura-linha-h1);
+ color: var(--cor-primaria);
+}
+
+h1 {
+ font-size: var(--tamanho-titulo-h1);
+}
+h2 {
+ font-size: 2rem;
+}
+h3 {
+ font-size: 1.75rem;
+}
+h4 {
+ font-size: 1.5rem;
+}
+
+p {
+ /* A maioria dos estilos de 'p' já são herdados do 'body'. Só precisamos ajustar o que for específico. */
+ max-width: 65ch; /* Limita a largura para melhor legibilidade (opcional, mas bom) */
+}
+
+a {
+ color: var(--cor-links);
+ text-decoration: none; /* Agora sim removemos o sublinhado de forma segura */
+ font-weight: var(--peso-negrito);
+}
+
+a:hover {
+ text-decoration: underline; /* Boa prática: devolve o sublinhado no hover */
+}
+
+img {
+ max-width: 100%;
+ display: block;
 }
 
 /* ------------------------> CENTRALIZAR UMA DIV NA SEÇÃO SEM USAR FLEXBOX*/
