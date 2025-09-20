@@ -42,9 +42,10 @@ VARIÁVEIS GLOBAIS (:ROOT)
  --peso-normal: 400;
  --peso-negrito: 700;
 
- --tamanho-texto-p: 1rem; /* 16px */
- --altura-linha-p: 1.6; /* 160% */
+ --tamanho-texto-p: 1.2rem; /* 16px */
+ --altura-linha-p: 1.3; /* 160% */
  --tamanho-titulo-h1: 2.5rem; /* 40px */
+ --tamanho-titulo-h2: 2.1rem; /* 40px */
  --altura-linha-h1: 1.2; /* 120% */
 }
 
@@ -58,14 +59,14 @@ h4 {
  font-family: var(--fonte-titulos);
  font-weight: var(--peso-negrito);
  line-height: var(--altura-linha-h1);
- color: var(--cor-primaria);
+ color: var(--cor-branca);
 }
 
 h1 {
  font-size: var(--tamanho-titulo-h1);
 }
 h2 {
- font-size: 2rem;
+ font-size: var(--tamanho-titulo-h2);
 }
 h3 {
  font-size: 1.75rem;
@@ -77,6 +78,10 @@ h4 {
 p {
  /* A maioria dos estilos de 'p' já são herdados do 'body'. Só precisamos ajustar o que for específico. */
  max-width: 65ch; /* Limita a largura para melhor legibilidade (opcional, mas bom) */
+ text-align: center;
+ min-width: 100%;
+ color: var(--cor-branca);
+ font-size: var(--tamanho-texto-p);
 }
 
 a {
@@ -100,8 +105,35 @@ img {
  position: relative; /* ESSENCIAL: Cria o "universo" onde o .son vai se posicionar. */
  background-color: rgb(68, 12, 179);
 }
+
+.father::before {
+ content: '';
+ opacity: 0.15;
+ background-color: transparent;
+ background-image: linear-gradient(90deg, #d9d9d9, #d9d9d9 1px, transparent 1px, transparent 11px),
+  linear-gradient(0deg, #d9d9d9, #d9d9d9 1px, transparent 1px, transparent 11px);
+ background-size: 50px 50px;
+ position: absolute;
+ border-radius: 0px;
+ top: 0;
+ bottom: auto;
+ left: 0;
+ z-index: 0;
+ width: 100%;
+ height: 100%;
+ transition: 0.5s;
+}
+.father::after {
+ content: '';
+ position: absolute;
+ left: 0;
+ background-image: radial-gradient(transparent 0%, #003463 70%);
+ width: 100%;
+ height: 100%;
+ z-index: 0;
+}
+
 .son {
- max-width: 50%;
  text-align: center;
  position: absolute; /* A mágica da centralização: */
  top: 50%;
@@ -109,6 +141,7 @@ img {
  transform: translate(-50%, -50%);
  color: white;
  max-width: 70vw;
+ z-index: 1;
 }
 
 /* ------------------------> CENTRALIZAR COM FLEXBOX E FUNDO TODO PREENCHIDO*/
@@ -126,6 +159,6 @@ img {
 
 /* SEU CONTEÚDO ORIGINAL */
 .conteudo {
- text-align: left;
+ text-align: center;
  max-width: 50%;
 }
