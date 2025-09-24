@@ -19,3 +19,11 @@ console.log(usuarios)
 
 //-------------> IT OPEN A BOX ON THE BROWSER, SO THE USER CAN TEXT SOMETHING
 //prompt('Dit it opened there, mooron?')
+
+// 1. Seleciona o elemento desejado
+const bgHero = document.querySelector('.relatives')
+const bgWhoWeAre = document.querySelector('.cards')
+// 2. Aplica o estilo de background diretamente na propriedade 'style.background'. Note que passamos apenas o valor, dentro de aspas.
+bgHero.style.background =
+ 'linear-gradient(180deg, rgba(7, 48, 108, 1) 0%, rgba(96, 58, 222, 1) 100%)'
+bgWhoWeAre.style.backgroundColor = '#1c1c1c'
