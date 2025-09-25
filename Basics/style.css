@@ -26,7 +26,7 @@ VARIÁVEIS GLOBAIS (:ROOT)
  /* Cores */
  --cor-primaria: #b0884e;
  --cor-fundo: #f4efe4;
- --cor-texto: #1b1b1b;
+ --black-light: #1b1b1b;
  --cor-branca: #ffffff;
  --cor-preta: #000000;
  --cor-cinza: #d9d9d9;
@@ -77,7 +77,6 @@ h4 {
 
 p {
  /* A maioria dos estilos de 'p' já são herdados do 'body'. Só precisamos ajustar o que for específico. */
- max-width: 65ch; /* Limita a largura para melhor legibilidade (opcional, mas bom) */
  text-align: center;
  min-width: 100%;
  color: var(--cor-branca);
@@ -128,10 +127,32 @@ img {
  max-width: 50%;
 }
 /* ------------------------> CARDS SECTION*/
-.cards .flexx {
- flex-direction: row;
+.los-cartones {
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: center;
+ gap: 1em;
+ max-width: 70vw;
 }
+
 .iamacard {
  max-width: 32%;
  width: 100%;
+ background-color: var(--cor-cinza);
+ border-radius: 10px;
+ padding: 1em;
+}
+
+.iamacard p {
+ color: var(--black-light);
+ font-weight: 700;
+ text-transform: uppercase;
+ font-size: 2rem;
+}
+
+img {
+ width: 100%;
+ height: auto;
+ object-fit: contain;
+ border-radius: 10px 10px 0 0;
 }

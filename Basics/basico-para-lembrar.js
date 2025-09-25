@@ -20,10 +20,32 @@ console.log(usuarios)
 //-------------> IT OPEN A BOX ON THE BROWSER, SO THE USER CAN TEXT SOMETHING
 //prompt('Dit it opened there, mooron?')
 
-// 1. Seleciona o elemento desejado
+//-------------> INSERIR COR DE FUNDO EM UMA DIV
 const bgHero = document.querySelector('.relatives')
 const bgWhoWeAre = document.querySelector('.cards')
-// 2. Aplica o estilo de background diretamente na propriedade 'style.background'. Note que passamos apenas o valor, dentro de aspas.
+//Aplica o estilo de background diretamente na propriedade 'style.background'. Note que passamos apenas o valor, dentro de aspas.
 bgHero.style.background =
  'linear-gradient(180deg, rgba(7, 48, 108, 1) 0%, rgba(96, 58, 222, 1) 100%)'
 bgWhoWeAre.style.backgroundColor = '#1c1c1c'
+
+//-------------> INSERT A TEXT BEFORE THE <P> IN THE CARDS SECTION
+const pDosCards = document.querySelector('.iamcard p') // Selected <p> to add the text after them
+const descricoes = [
+ 'Hi,im eistein and was add by js',
+ 'Add with js 2',
+ 'And im the last card of the list'
+]
+// PASSO 3: O código passa por cada legenda e insere a descrição correspondente. Usamos um loop .forEach para passar por cada elemento encontrado.O forEach nos dá o elemento (alvo) e sua posição na lista (index).
+pDosCards.forEach((legenda, index) => {
+ // Verifica se existe uma descrição para a legenda atual
+ if (descricoes[index]) {
+  // 1. Cria um novo elemento <p>
+  const novoParagrafo = document.createElement('p')
+  // 2. Adiciona o texto da descrição correspondente ao <p>
+  novoParagrafo.textContent = descricoes[index]
+  // 3. (Opcional) Adiciona uma classe ao <p> para você poder estilizá-lo com CSS
+  novoParagrafo.classList.add('descricao-imagem-custom')
+  // 4. Insere o novo parágrafo logo após a legenda (<figcaption>)
+  legenda.insertAdjacentElement('afterend', novoParagrafo)
+ }
+})
