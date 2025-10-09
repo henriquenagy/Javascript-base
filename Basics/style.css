@@ -5,8 +5,12 @@ CSS PATTERN 2025 - por nagydzn (Revisado)
 * {
  margin: 0;
  padding: 0;
+ -webkit-box-sizing: border-box;
  box-sizing: border-box;
+ scrollbar-width: thin;
+ scrollbar-color: #8750f7 #2a1454;
 }
+
 html {
  scroll-behavior: smooth;
  font-size: 100%;
@@ -124,7 +128,7 @@ img {
 }
 .inside-flexx {
  text-align: center;
- max-width: 50%;
+ max-width: 70vw;
 }
 
 /* ------------------------> CARDS SECTION*/
@@ -154,4 +158,25 @@ p.formataAddedP {
  color: var(--Purple);
  font-size: var(--tamanho-texto-p);
  font-weight: var(--peso-leve);
+}
+
+/* ------------------------> 4th SECTION*/
+.sectionFOUR {
+ padding: 3em 0 0 0;
+ color: var(--white);
+}
+
+#titlePlusUl {
+ text-align: left;
+ max-width: 47%;
+ display: flex;
+ flex-direction: column;
+ gap: 2em;
+ justify-content: center;
+}
+#insideSectionfour {
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: space-around;
+ gap: 1em;
 }
