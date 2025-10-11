@@ -160,6 +160,26 @@ p.formataAddedP {
  font-weight: var(--peso-leve);
 }
 
+.bttn {
+ font-family: var(--fonte-padrao);
+ font-weight: var(--peso-negrito);
+ font-size: 2em;
+ text-transform: uppercase;
+ color: var(--white);
+ padding: 10px 25px;
+ border-radius: 50px;
+ background-color: var(--Purple);
+ border: none;
+ transition-delay: 0s !important;
+ will-change: transform;
+ transition: transform 0.2s ease-in-out;
+}
+
+.bttn:hover {
+ cursor: pointer;
+ transform: scale(1.06);
+}
+
 /* ------------------------> 4th SECTION*/
 .sectionFOUR {
  padding: 3em 0 0 0;

@@ -74,8 +74,9 @@ Object.assign(colocarUnaImagene.style, {
 
 getUl.style.listStyle = 'none' // REAPROVEITAR UL PARA REMOVER OS PONTOS DA LISTA
 
-const divComCards = document.querySelector('.los-cartones')
+const divComCards = document.querySelector('.los-cartones') // INSERIR BOTÃO DENTRO DE UMA DIV
 const btnJS = document.createElement('button')
+btnJS.classList.add('bttn')
 btnJS.textContent = 'Esse botão é do JS'
 divComCards.append(btnJS)
 
@@ -103,4 +104,7 @@ allElements.forEach(card => {
 const terceiroLi = document.querySelectorAll('li')[2] //EMBORA seja com selectorALL,se vc pegar o índice (que começa em zero) dá para estilizar somente um item sem usar forEach
 terceiroLi.style.color = 'red'
 
-//AGORA CRIAR UM BOTÃO AQUI, E AO CLICAR NELE, MODIFICA A CLASSE CSS DE UM ITEM - Terminar de por o botão, colocar a classe no js (deixar isso + facil de localizar no word) e estilizar o botao pelo css memso
+const allSections = document.querySelectorAll('.section')
+console.log(allSections)
+
+//PAREI AQUI ALTERANDO ESTILOS, CLASSES , COR
