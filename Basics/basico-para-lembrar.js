@@ -111,7 +111,7 @@ console.log(allSections)
 
 //USANDO GETCOMPUTEDSTYLE PARA FAZER LEITURAS
 const secaoCards = document.querySelector('.sectionTHREE')
-console.log(getComputedStyle(secaoCards))
+//console.log(getComputedStyle(secaoCards)) //Tampei só pra não poluir o console, mostra muita coisa
 console.log(getComputedStyle(secaoCards).color) //rgb(0, 0, 0)
 console.log(getComputedStyle(secaoCards).height) //674.766px
 
@@ -122,3 +122,31 @@ secaoCards.style.height = Number.parseFloat(getComputedStyle(secaoCards).height)
 const segundoLi = document.querySelectorAll('li')[1]
 segundoLi.style.color = 'var(--troqueinoJS)'
 document.documentElement.style.setProperty('--troqueinoJS', '#41b3ff') // Trocando a cor de um elemento
+
+//--------------------------> Acessar atributos de um elemento
+
+//////////////ABAIXO INDO DIRETO AO ITEM COM SRC, ALT, CLASSNAME
+const primeiraImagem = document.querySelector('.iamacard img') // 1. Selecionamos a primeira imagem dos cards
+console.log(primeiraImagem.src) // Retorna o link completo da imagem
+console.log(primeiraImagem.alt) // Retorna o texto do 'alt'
+console.log(primeiraImagem.className) // Retorna a classe da imagem
+primeiraImagem.alt = 'Imagem de Einstein adicionada via JS' // Modificando um atributo padrão. Agora o 'alt' tem um novo texto
+console.log(primeiraImagem.alt) // Só para mostrar o alt que já foi trocado
+
+//////////////AGORA USANDO O GET E SET ATTRIBUTE
+primeiraImagem.setAttribute('data-criador', 'Nagys') // Primeiro, vamos criar um atributo customizado com setAttribute(). 'data-criador' não é um atributo padrão
+console.log('Atributo customizado (jeito errado):', primeiraImagem.dataCriador) //Tentando ler o atributo customizado do jeito "fácil" (NÃO FUNCIONA).  Retorna 'undefined'
+console.log('Atributo customizado (jeito certo):', primeiraImagem.getAttribute('data-criador')) // Lendo o atributo customizado do JEITO CERTO, com getAttribute() Retorna 'Nagys'
+
+//////////////DEMONSTRANDO A DIFERENÇA COM LINKS <a>
+const novoLink = document.createElement('a') // Como não há links no seu HTML, vamos criar um com JS para testar
+novoLink.href = '#unicao' // Aponta para um ID que existe na sua página
+novoLink.style.color = 'white'
+novoLink.textContent = 'Ir para a seção "O que fazemos"'
+document.querySelector('.absolutes').append(novoLink) // Adiciona o link na primeira seção
+
+// Agora, vamos ver a diferença que sua anotação apontou:
+console.log('Link .href (valor COMPLETO):', novoLink.href) // Mostra o URL inteiro, http://127.0.0.1:5500/Basics/index.html#unicao
+console.log('Link .getAttribute("href") (valor EXATO do código):', novoLink.getAttribute('href')) // Mostra exatamente o que escrevemos: #unicao
+
+// AGORA TEM QUE VER children, elementChild, closest, sibling E O Scope (Escopo) REVER!!!!
