@@ -107,4 +107,18 @@ terceiroLi.style.color = 'red'
 const allSections = document.querySelectorAll('.section')
 console.log(allSections)
 
-//PAREI AQUI ALTERANDO ESTILOS, CLASSES , COR
+//--------------------------> ALTERAÇÕES AVANÇADAS
+
+//USANDO GETCOMPUTEDSTYLE PARA FAZER LEITURAS
+const secaoCards = document.querySelector('.sectionTHREE')
+console.log(getComputedStyle(secaoCards))
+console.log(getComputedStyle(secaoCards).color) //rgb(0, 0, 0)
+console.log(getComputedStyle(secaoCards).height) //674.766px
+
+//Modificando valor da variável
+secaoCards.style.height = Number.parseFloat(getComputedStyle(secaoCards).height) + 50 + 'px' // Soma 50 e aplica o novo valor
+
+//Modificando uma cor global do site com setproperty
+const segundoLi = document.querySelectorAll('li')[1]
+segundoLi.style.color = 'var(--troqueinoJS)'
+document.documentElement.style.setProperty('--troqueinoJS', '#41b3ff') // Trocando a cor de um elemento
