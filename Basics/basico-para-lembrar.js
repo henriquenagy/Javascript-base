@@ -1,14 +1,15 @@
-//--------------------------> SINAIS DE ALERTA E ERRO NO CONSOLE INSPECIONAR
+// ===================================================
+// CONSOLE.LOG E VARIAÇÕES
+// ===================================================
 console.warn('ESSE NÃO É ERRO, É SÓ UM AVISO') //Use o console.warn() para exibir avisos. Não é um erro que quebra a aplicação, mas uma situação que o desenvolvedor deve estar ciente.
 console.error('Falha na autenticação: A senha precisa ter no mínimo 8 caracteres.') //Use o console.error() para exibir erros. Diferente de um aviso, um erro geralmente significa que algo deu errado e a operação esperada não pôde ser concluída. É usado para mensagens de falha crítica.
 
-//-------------------------->APENAS MENSAGENS NO CONSOLE INSPECIONAR
 console.log('Para aparecer algo no console - inspecionar elemento')
 console.log('String with \n multiple \n lines') //Aspas Normais (' ou "): Use \n para pular a linha na saída, mas escreva todo o seu código em uma única linha.
 console.log(`String
-with multiple lines`) //Aspas de Acento (`): Pode pular a linha diretamente no seu código, e essa quebra será refletida na saída.
+ with multiple lines`) //Aspas de Acento (`): Pode pular a linha diretamente no seu código, e essa quebra será refletida na saída.
 
-//--------------------------> console.table() serve para exibir dados complexos, como arrays e objetos, de uma forma muito mais organizada e legível do que o console.log() tradicional.  Ele formata os dados em uma tabela interativa dentro do console do navegador.
+// console.table() serve para exibir dados complexos, como arrays e objetos, de uma forma muito mais organizada e legível do que o console.log() tradicional.  Ele formata os dados em uma tabela interativa dentro do console do navegador.
 const usuarios = [
  { id: 1, nome: 'Ana', cidade: 'São Paulo' },
  { id: 2, nome: 'Bruno', cidade: 'Rio de Janeiro' },
@@ -17,10 +18,13 @@ const usuarios = [
 console.table(usuarios)
 console.log(usuarios)
 
-//--------------------------> IT OPEN A BOX ON THE BROWSER, SO THE USER CAN TEXT SOMETHING
+// APARECE UMA CAIXA/MENSAGEM NA FRENTE DO NAVEGADOR, OCULTEI PRA NÃO ATRAPALHAR
 //prompt('Dit it opened there, mooron?')
 
-//--------------------------> INSERT A TEXT AFTER THE <P> IN THE CARDS SECTION
+// ===================================================
+// USAR IF COM insertAdjacentElement PARA ADICIONAR ELEMENTO
+// ===================================================
+
 const pDosCards = document.querySelectorAll('.iamacard p') // Seleciona TODOS os parágrafos (<p>) dentro das divs com a classe .iamacard
 const descricoes = ['Added by Js No 1', 'Js No2', 'Js No3'] // As descrições que você quer adicionar
 
@@ -34,7 +38,11 @@ pDosCards.forEach((paragrafoExistente, index) => {
   novoParagrafo.classList.add('formataAddedP') // Adiciona uma classe e alterei depois no CSS
  }
 })
-//--------------------------> TESTES DE QUERY SELECTOR SIMPLES
+
+// ===================================================
+// TESTES DE QUERY SELECTOR SIMPLES
+// ===================================================
+
 const bgHero = document.querySelector('.relatives') // INSERIR COR DE FUNDO 1a seção
 bgHero.style.background = 'linear-gradient(180deg, rgba(7, 48, 108, 1) 0%, rgba(96, 58, 222, 1) 100%)'
 
@@ -51,14 +59,15 @@ console.log(firstElement) //Veja no console q aparece o <p> selecionado
 const quartoLi = document.querySelector('li:nth-of-type(4)') // PEGAR UM ELEMENTO ESPECÍFICO (n)
 quartoLi.style.color = '#50F798'
 
-const getUl = document.querySelector('.inside-flexx ul') //VOU COLOCAR H1 ANTES USANDO ESSE UL COMO BASE
+//----------------------> INSERIR ITENS DENTRO DO HTML
+const getUl = document.querySelector('#titledosobre') //VOU COLOCAR H1 NO COMEÇO DA SEÇÃO
 const getSectionUl = document.querySelector('#titlePlusUl') //VOU COLOCAR IMAGEM DEPOIS DA SEÇÃO DA UL
 const insertH1 = document.createElement('h1') //CRIO H1
 const colocarUnaImagene = document.createElement('img') // CRIO A IMAGEM PARA POR DEPOIS
 
 insertH1.textContent = 'I am H1 and was added here by JS' // Colocando e editando H1
 insertH1.style.color = 'var(--Purple)'
-getUl.insertAdjacentElement('beforebegin', insertH1)
+getUl.insertAdjacentElement('afterbegin', insertH1)
 
 colocarUnaImagene.src = 'img/MM.webp' // Dando o endereço da imagem via src
 colocarUnaImagene.alt = 'Descrição da Imagem' // Boa prática
@@ -80,7 +89,10 @@ btnJS.classList.add('bttn')
 btnJS.textContent = 'Esse botão é do JS'
 divComCards.append(btnJS)
 
-//--------------------------> TESTE DE QUERY SELECTOR ALL
+// ===================================================
+// TESTE DE QUERY SELECTOR ALL
+// ===================================================
+
 const todosOsPCards = document.querySelectorAll('.iamacard p') //Seleciona todos os <p>
 const segundoPCard = todosOsPCards[1] // Depois, acessamos o segundo item da lista (que está na posição 1, pois a contagem começa em 0).
 segundoPCard.style.color = 'orange' // Mudando a cor do texto
@@ -107,7 +119,9 @@ terceiroLi.style.color = 'red'
 const allSections = document.querySelectorAll('.section')
 console.log(allSections)
 
-//--------------------------> ALTERAÇÕES AVANÇADAS
+// ===================================================
+// ALTERAÇÕES AVANÇADAS
+// ===================================================
 
 //USANDO GETCOMPUTEDSTYLE PARA FAZER LEITURAS
 const secaoCards = document.querySelector('.sectionTHREE')
@@ -118,19 +132,21 @@ console.log(getComputedStyle(secaoCards).height) //674.766px
 //Modificando valor da variável
 secaoCards.style.height = Number.parseFloat(getComputedStyle(secaoCards).height) + 50 + 'px' // Soma 50 e aplica o novo valor
 
-//Modificando uma cor global do site com setproperty
+//Modificando uma cor do ROOT CSS com setproperty
 const segundoLi = document.querySelectorAll('li')[1]
 segundoLi.style.color = 'var(--troqueinoJS)'
 document.documentElement.style.setProperty('--troqueinoJS', '#41b3ff') // Trocando a cor de um elemento
 
-//--------------------------> Acessar atributos de um elemento
+// ===================================================
+// ACESSAR ATRIBUTOS DE UM ELEMENTO
+// ===================================================
 
 //////////////ABAIXO INDO DIRETO AO ITEM COM SRC, ALT, CLASSNAME
 const primeiraImagem = document.querySelector('.iamacard img') // 1. Selecionamos a primeira imagem dos cards
 console.log(primeiraImagem.src) // Retorna o link completo da imagem
 console.log(primeiraImagem.alt) // Retorna o texto do 'alt'
 console.log(primeiraImagem.className) // Retorna a classe da imagem
-primeiraImagem.alt = 'Imagem de Einstein adicionada via JS' // Modificando um atributo padrão. Agora o 'alt' tem um novo texto
+primeiraImagem.alt = 'TEXTO ALTERADO via JS' // Modificando um atributo padrão. Agora o 'alt' tem um novo texto
 console.log(primeiraImagem.alt) // Só para mostrar o alt que já foi trocado
 
 //////////////AGORA USANDO O GET E SET ATTRIBUTE
@@ -149,4 +165,32 @@ document.querySelector('.absolutes').append(novoLink) // Adiciona o link na prim
 console.log('Link .href (valor COMPLETO):', novoLink.href) // Mostra o URL inteiro, http://127.0.0.1:5500/Basics/index.html#unicao
 console.log('Link .getAttribute("href") (valor EXATO do código):', novoLink.getAttribute('href')) // Mostra exatamente o que escrevemos: #unicao
 
-// AGORA TEM QUE VER children, elementChild, closest, sibling E O Scope (Escopo) REVER!!!!
+// ===================================================
+// Navegando pelo DOM (children, elementChild, closest, sibling)
+// ===================================================
+
+//-----------------------> 1. Navegando para Baixo (Acessando os Filhos)
+const primeiroCard = document.querySelector('.iamacard') // Seleciona a div "pai" do primeiro card
+console.log(primeiroCard)
+
+//PAREI AQUI E PRECISA TESTAR AGORA O DONWARDS
+
+primeiroCard.firstElementChild.style.border = '2px solid green' // Pega o PRIMEIRO filho (a imagem) e muda a borda
+primeiroCard.lastElementChild.style.color = 'green' // Pega o ÚLTIMO filho (o parágrafo) e muda a cor
+
+const testeChildren = document.querySelector('.absolutes') //caixa 1 dentro da 1a seção
+console.log(testeChildren.children[1]) //<p style="color: var(--gray);"....</p>
+testeChildren.children[0].style.backgroundColor = 'red' // O primeiro filho
+testeChildren.children[1].style.color = 'var(--gray)' // O segundo filho
+
+console.log(testeChildren.childNodes[2]) //#text
+
+//-----------------------> 2. Navegando para Cima (Acessando os Pais)
+const pDoCard = document.querySelector('.iamacard p') // Seleciona o parágrafo "filho"
+pDoCard.parentElement.style.backgroundColor = 'var(--gray)' // Pega o PAI direto (a div .iamacard) e muda o fundo
+pDoCard.closest('.cards').style.backgroundColor = 'var(--black-light)' // Pega o ancestral mais próximo com a classe .cards (a section) e muda o fundo
+
+//-----------------------> 3. Navegando para os Lados (Acessando os Irmãos)
+const segundoCard = document.querySelectorAll('.iamacard')[1] // Seleciona o segundo card como ponto de partida
+segundoCard.previousElementSibling.style.transform = 'scale(0.7)' // Pega o irmão ANTERIOR (o primeiro card) e aplica uma escala
+segundoCard.nextElementSibling.style.transform = 'scale(0.95)' // Pega o próximo irmão (o terceiro card) e aplica uma escala
