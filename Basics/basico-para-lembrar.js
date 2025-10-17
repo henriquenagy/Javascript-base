@@ -154,7 +154,7 @@ primeiraImagem.setAttribute('data-criador', 'Nagys') // Primeiro, vamos criar um
 console.log('Atributo customizado (jeito errado):', primeiraImagem.dataCriador) //Tentando ler o atributo customizado do jeito "fácil" (NÃO FUNCIONA).  Retorna 'undefined'
 console.log('Atributo customizado (jeito certo):', primeiraImagem.getAttribute('data-criador')) // Lendo o atributo customizado do JEITO CERTO, com getAttribute() Retorna 'Nagys'
 
-//////////////DEMONSTRANDO A DIFERENÇA COM LINKS <a>
+//////////////INSERINDO LINK <a> DEMONSTRANDO A DIFERENÇA COM LINKS <a>
 const novoLink = document.createElement('a') // Como não há links no seu HTML, vamos criar um com JS para testar
 novoLink.href = '#redirects' // Aponta para um ID que existe na sua página
 novoLink.style.color = 'white'
@@ -210,3 +210,48 @@ Array.from(listaDeIrmaos).forEach(function (elementoIrmao) {
 })
 
 // AGORA VAMOS PARA ROOT DO CSS EM JS
+
+// ===================================================
+// EVENT LISTENERS
+// ===================================================
+
+//-----------------------> 1. Evento de Clique ('click') e troca o title da seção dos cards junto da cor
+const botaoCriadoComJS = document.querySelector('.bttn')
+const tituloDosCards = document.querySelector('.los-cartones h2')
+
+botaoCriadoComJS.addEventListener('click', function () {
+ tituloDosCards.textContent = 'Você clicou no botão!'
+ tituloDosCards.style.color = 'var(--Green)'
+})
+
+//-----------------------> 2. Eventos de Mouse ('mouseover' e 'mouseout') - Exemplo de Eventos de Mouse
+const terceiroCard = document.querySelectorAll('.iamacard')[2] // Pega o terceiro card
+// Ocorre quando o mouse ENTRA na área do elemento
+terceiroCard.addEventListener('mouseover', function () {
+ terceiroCard.style.backgroundColor = 'lightblue'
+})
+// Ocorre quando o mouse SAI da área do elemento
+terceiroCard.addEventListener('mouseout', function () {
+ terceiroCard.style.backgroundColor = 'var(--white)' // Volta para a cor original
+})
+
+//-----------------------> 3. Eventos de Teclado ('keydown')
+// Adiciona o "ouvinte" ao documento inteiro
+document.addEventListener('keydown', function (e) {
+ // 'e' é o objeto do evento, que contém informações sobre a tecla
+ console.log('Tecla pressionada:', e.key) // Mostra o nome da tecla no console
+ // Se a tecla pressionada for 'Escape'...
+ if (e.key === 'Escape') {
+  // ...muda o fundo da primeira seção para preto.
+  document.querySelector('.sectionONE').style.background = 'var(--black)'
+ }
+})
+
+//-----------------------> 4. O Objeto de Evento (o e na função) -  Usando o link que criamos em outro exercício
+const linkCriado = document.querySelector('.absolutes a')
+linkCriado.addEventListener('click', function (e) {
+ // Impede o link de navegar para a âncora #redirects
+ e.preventDefault()
+ // Em vez disso, apenas muda a cor do link
+ e.target.style.color = 'red'
+})
