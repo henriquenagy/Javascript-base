@@ -156,14 +156,14 @@ console.log('Atributo customizado (jeito certo):', primeiraImagem.getAttribute('
 
 //////////////DEMONSTRANDO A DIFERENÇA COM LINKS <a>
 const novoLink = document.createElement('a') // Como não há links no seu HTML, vamos criar um com JS para testar
-novoLink.href = '#unicao' // Aponta para um ID que existe na sua página
+novoLink.href = '#redirects' // Aponta para um ID que existe na sua página
 novoLink.style.color = 'white'
 novoLink.textContent = 'Ir para a seção "O que fazemos"'
 document.querySelector('.absolutes').append(novoLink) // Adiciona o link na primeira seção
 
 // Agora, vamos ver a diferença que sua anotação apontou:
-console.log('Link .href (valor COMPLETO):', novoLink.href) // Mostra o URL inteiro, http://127.0.0.1:5500/Basics/index.html#unicao
-console.log('Link .getAttribute("href") (valor EXATO do código):', novoLink.getAttribute('href')) // Mostra exatamente o que escrevemos: #unicao
+console.log('Link .href (valor COMPLETO):', novoLink.href) // Mostra o URL inteiro, http://127.0.0.1:5500/Basics/index.html#redirects
+console.log('Link .getAttribute("href") (valor EXATO do código):', novoLink.getAttribute('href')) // Mostra exatamente o que escrevemos: #redirects
 
 // ===================================================
 // Navegando pelo DOM (children, elementChild, closest, sibling)
@@ -171,17 +171,19 @@ console.log('Link .getAttribute("href") (valor EXATO do código):', novoLink.get
 
 //-----------------------> 1. Navegando para Baixo (Acessando os Filhos)
 const primeiroCard = document.querySelector('.iamacard') // Seleciona a div "pai" do primeiro card
-console.log(primeiroCard)
-
-//PAREI AQUI E PRECISA TESTAR AGORA O DONWARDS
-
+//Checar com CLG qual item estamos pegando com o const primeiroCard
+console.log(primeiroCard.querySelectorAll('.highlight')) //Nodelist [0]
+console.log(primeiroCard.childNodes) // NodeList(6) [text, img.unaClassParaJS, text, p, p.formataAddedP, text]
+console.log(primeiroCard.children) //HTMLCollection(3) [img.unaClassParaJS, p, p.formataAddedP]
+//Ai nos dois abaixo, é como se tivesse usado o children do CLG primeirocard.children
 primeiroCard.firstElementChild.style.border = '2px solid green' // Pega o PRIMEIRO filho (a imagem) e muda a borda
 primeiroCard.lastElementChild.style.color = 'green' // Pega o ÚLTIMO filho (o parágrafo) e muda a cor
 
+//Agora teste somente com children + posição
 const testeChildren = document.querySelector('.absolutes') //caixa 1 dentro da 1a seção
 console.log(testeChildren.children[1]) //<p style="color: var(--gray);"....</p>
 testeChildren.children[0].style.backgroundColor = 'red' // O primeiro filho
-testeChildren.children[1].style.color = 'var(--gray)' // O segundo filho
+testeChildren.children[1].style.color = 'orange' // O segundo filho
 
 console.log(testeChildren.childNodes[2]) //#text
 
@@ -194,3 +196,17 @@ pDoCard.closest('.cards').style.backgroundColor = 'var(--black-light)' // Pega o
 const segundoCard = document.querySelectorAll('.iamacard')[1] // Seleciona o segundo card como ponto de partida
 segundoCard.previousElementSibling.style.transform = 'scale(0.7)' // Pega o irmão ANTERIOR (o primeiro card) e aplica uma escala
 segundoCard.nextElementSibling.style.transform = 'scale(0.95)' // Pega o próximo irmão (o terceiro card) e aplica uma escala
+
+//Estilizando Todos os Irmãos, Menos o Próprio Elemento
+const h2Test = document.querySelector('.inside-flexx h2') // 1. Seleciona o h2 como nosso ponto de partida
+const listaDeIrmaos = h2Test.parentElement.children // 2. Acessa a lista de todos os filhos do elemento pai
+// 3. Converte a lista para um array e percorre cada item com .forEach
+Array.from(listaDeIrmaos).forEach(function (elementoIrmao) {
+ // 4. Se o item da lista for DIFERENTE do nosso h1 original...
+ if (elementoIrmao !== h2Test) {
+  // ...aplica o estilo.
+  elementoIrmao.style.opacity = '0.5'
+ }
+})
+
+// AGORA VAMOS PARA ROOT DO CSS EM JS
