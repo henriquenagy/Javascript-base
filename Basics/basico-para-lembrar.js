@@ -209,8 +209,6 @@ Array.from(listaDeIrmaos).forEach(function (elementoIrmao) {
  }
 })
 
-// AGORA VAMOS PARA ROOT DO CSS EM JS
-
 // ===================================================
 // EVENT LISTENERS
 // ===================================================
@@ -243,11 +241,11 @@ document.addEventListener('keydown', function (e) {
  // Se a tecla pressionada for 'Escape'...
  if (e.key === 'Escape') {
   // ...muda o fundo da primeira seção para preto.
-  document.querySelector('.sectionONE').style.background = 'var(--black)'
+  document.querySelector('.sectionONE').style.background = 'var(--black-light)'
  }
 })
 
-//-----------------------> 4. O Objeto de Evento (o e na função) -  Usando o link que criamos em outro exercício
+//-----------------------> 4. O Objeto de Evento (o 'e' na função) -  Usando o link que criamos em outro exercício
 const linkCriado = document.querySelector('.absolutes a')
 linkCriado.addEventListener('click', function (e) {
  // Impede o link de navegar para a âncora #redirects
