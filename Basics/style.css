@@ -12,7 +12,7 @@ CSS PATTERN 2025 - por nagydzn (Revisado)
 }
 
 html {
- scroll-behavior: smooth;
+ scroll-behavior: auto; /* IMPORTANTE: Precisa ser 'auto' por conta do lenis scroll dentro do html*/
  font-size: 100%;
 }
 
@@ -179,6 +179,12 @@ p.formataAddedP {
 .bttn:hover {
  cursor: pointer;
  transform: scale(1.06);
+}
+
+/* Estilo para o card quando ele for selecionado via JS BUBBLING CAPTURING*/
+.card-selecionado {
+ outline: 3px solid var(--Purple);
+ transform: scale(1.03);
 }
 
 /* ------------------------> 4th SECTION*/

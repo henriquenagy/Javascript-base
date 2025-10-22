@@ -1,4 +1,19 @@
 // ===================================================
+// INICIALIZAÇÃO DO SCROLL SUAVE (LENIS)
+// ===================================================
+
+// 1. Cria a instância do Lenis
+const lenis = new Lenis()
+
+// 2. Cria o "loop" de animação que atualiza o scroll a cada quadro
+function raf(time) {
+ lenis.raf(time)
+ requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+// ===================================================
 // CONSOLE.LOG E VARIAÇÕES
 // ===================================================
 console.warn('ESSE NÃO É ERRO, É SÓ UM AVISO') //Use o console.warn() para exibir avisos. Não é um erro que quebra a aplicação, mas uma situação que o desenvolvedor deve estar ciente.
@@ -252,4 +267,23 @@ linkCriado.addEventListener('click', function (e) {
  e.preventDefault()
  // Em vez disso, apenas muda a cor do link
  e.target.style.color = 'red'
+})
+
+// ===================================================
+// EXEMPLO PRÁTICO DE EVENT BUBBLING (DELEGAÇÃO DE EVENTOS)
+// ===================================================
+// 1. Em vez de selecionar cada card, selecionamos o container PAI deles.
+const containerDosCards = document.querySelector('.los-cartones')
+// 2. Adicionamos UM ÚNICO "ouvinte" de clique no container PAI.
+containerDosCards.addEventListener('click', function (e) {
+ // 3. 'e.target' é o elemento exato onde o clique começou (pode ser a imagem, o <p>, etc.).
+ // Usamos .closest('.iamacard') para encontrar o ancestral mais próximo que seja um card.
+ const cardClicado = e.target.closest('.iamacard')
+ // 4. Se o clique não foi dentro de um '.iamacard' (foi no espaço entre eles),
+ // a variável 'cardClicado' será nula e a função vai parar aqui.
+ if (!cardClicado) return
+ // 5. Se um card foi encontrado, adicionamos ou removemos a classe 'card-selecionado'.
+ // Usar 'toggle' é ótimo para "ligar e desligar" o efeito.
+ console.log('Card clicado:', cardClicado)
+ cardClicado.classList.toggle('card-selecionado')
 })
