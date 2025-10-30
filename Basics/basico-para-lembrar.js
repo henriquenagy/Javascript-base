@@ -1,19 +1,4 @@
 // ===================================================
-// INICIALIZAÇÃO DO SCROLL SUAVE (LENIS)
-// ===================================================
-
-// 1. Cria a instância do Lenis
-const lenis = new Lenis()
-
-// 2. Cria o "loop" de animação que atualiza o scroll a cada quadro
-function raf(time) {
- lenis.raf(time)
- requestAnimationFrame(raf)
-}
-
-requestAnimationFrame(raf)
-
-// ===================================================
 // CONSOLE.LOG E VARIAÇÕES
 // ===================================================
 console.warn('ESSE NÃO É ERRO, É SÓ UM AVISO') //Use o console.warn() para exibir avisos. Não é um erro que quebra a aplicação, mas uma situação que o desenvolvedor deve estar ciente.
@@ -83,11 +68,12 @@ const colocarUnaImagene = document.createElement('img') // CRIO A IMAGEM PARA PO
 insertH1.textContent = 'I am H1 and was added here by JS' // Colocando e editando H1
 insertH1.style.color = 'var(--Purple)'
 getUl.insertAdjacentElement('afterbegin', insertH1)
+getUl.style.listStyle = 'none' // REAPROVEITAR UL PARA REMOVER OS PONTOS DA LISTA
 
 colocarUnaImagene.src = 'img/MM.webp' // Dando o endereço da imagem via src
 colocarUnaImagene.alt = 'Descrição da Imagem' // Boa prática
 getSectionUl.insertAdjacentElement('afterend', colocarUnaImagene) // Insere a imagem no HTML
-// CORREÇÃO: Use 'Object.assign()' com 'O' maiúsculo
+// CORREÇÃO: Use 'Object.assign()' com 'O' maiúsculo, correto é criar classe e mexer pelo CSS
 Object.assign(colocarUnaImagene.style, {
  width: '100%',
  height: 'auto',
@@ -95,8 +81,6 @@ Object.assign(colocarUnaImagene.style, {
  maxWidth: '47%',
  marginTop: '2em'
 })
-
-getUl.style.listStyle = 'none' // REAPROVEITAR UL PARA REMOVER OS PONTOS DA LISTA
 
 const divComCards = document.querySelector('.los-cartones') // INSERIR BOTÃO DENTRO DE UMA DIV
 const btnJS = document.createElement('button')
@@ -108,9 +92,11 @@ divComCards.append(btnJS)
 // TESTE DE QUERY SELECTOR ALL
 // ===================================================
 
-const todosOsPCards = document.querySelectorAll('.iamacard p') //Seleciona todos os <p>
-const segundoPCard = todosOsPCards[1] // Depois, acessamos o segundo item da lista (que está na posição 1, pois a contagem começa em 0).
-segundoPCard.style.color = 'orange' // Mudando a cor do texto
+const segundoPCard = document.querySelectorAll('.iamacard p')[2] //Seleciona todos os <p> E depois, acessamos o 3 item da lista (que está na posição 2, pois a contagem começa em 0).
+segundoPCard.style.color = 'yellow' // Mudando a cor do texto
+
+const terceiroLi = document.querySelectorAll('li')[2]
+terceiroLi.style.color = 'red'
 
 const allLi = document.querySelectorAll('.inside-flexx ul li') //Colocar cor branca nos ul li. Abaixo usamos .forEach() PARA PASSAR POR CADA ITEM DA LISTA
 allLi.forEach(itemDaLista => {
@@ -127,12 +113,6 @@ allElements.forEach(card => {
  card.style.padding = '1em'
  card.style.borderRadius = '10px'
 })
-
-const terceiroLi = document.querySelectorAll('li')[2] //EMBORA seja com selectorALL,se vc pegar o índice (que começa em zero) dá para estilizar somente um item sem usar forEach
-terceiroLi.style.color = 'red'
-
-const allSections = document.querySelectorAll('.section')
-console.log(allSections)
 
 // ===================================================
 // ALTERAÇÕES AVANÇADAS
@@ -175,13 +155,14 @@ novoLink.href = '#redirects' // Aponta para um ID que existe na sua página
 novoLink.style.color = 'white'
 novoLink.textContent = 'Ir para a seção "O que fazemos"'
 document.querySelector('.absolutes').append(novoLink) // Adiciona o link na primeira seção
+//OBS: NAO VAI FUNCIONAR PQ EU IMPEDI O MOVIMENTO MAIS PRA BAIXO EM EVENT LISTENERS
 
 // Agora, vamos ver a diferença que sua anotação apontou:
 console.log('Link .href (valor COMPLETO):', novoLink.href) // Mostra o URL inteiro, http://127.0.0.1:5500/Basics/index.html#redirects
 console.log('Link .getAttribute("href") (valor EXATO do código):', novoLink.getAttribute('href')) // Mostra exatamente o que escrevemos: #redirects
 
 // ===================================================
-// Navegando pelo DOM (children, elementChild, closest, sibling)
+// Pegar item com children, elementChild, closest, sibling
 // ===================================================
 
 //-----------------------> 1. Navegando para Baixo (Acessando os Filhos)
@@ -192,35 +173,34 @@ console.log(primeiroCard.childNodes) // NodeList(6) [text, img.unaClassParaJS, 
 console.log(primeiroCard.children) //HTMLCollection(3) [img.unaClassParaJS, p, p.formataAddedP]
 //Ai nos dois abaixo, é como se tivesse usado o children do CLG primeirocard.children
 primeiroCard.firstElementChild.style.border = '2px solid green' // Pega o PRIMEIRO filho (a imagem) e muda a borda
-primeiroCard.lastElementChild.style.color = 'green' // Pega o ÚLTIMO filho (o parágrafo) e muda a cor
+primeiroCard.lastElementChild.style.color = 'red' // Pega o ÚLTIMO filho (o parágrafo) e muda a cor
 
 //Agora teste somente com children + posição
 const testeChildren = document.querySelector('.absolutes') //caixa 1 dentro da 1a seção
-console.log(testeChildren.children[1]) //<p style="color: var(--gray);"....</p>
+console.log(testeChildren.children[1]) //<p style="color: orange;">...</p>
 testeChildren.children[0].style.backgroundColor = 'red' // O primeiro filho
 testeChildren.children[1].style.color = 'orange' // O segundo filho
-
 console.log(testeChildren.childNodes[2]) //#text
 
 //-----------------------> 2. Navegando para Cima (Acessando os Pais)
 const pDoCard = document.querySelector('.iamacard p') // Seleciona o parágrafo "filho"
-pDoCard.parentElement.style.backgroundColor = 'var(--gray)' // Pega o PAI direto (a div .iamacard) e muda o fundo
+pDoCard.parentElement.style.backgroundColor = 'lightblue' // Pega o PAI direto (a div .iamacard) e muda o fundo
 pDoCard.closest('.cards').style.backgroundColor = 'var(--black-light)' // Pega o ancestral mais próximo com a classe .cards (a section) e muda o fundo
 
 //-----------------------> 3. Navegando para os Lados (Acessando os Irmãos)
 const segundoCard = document.querySelectorAll('.iamacard')[1] // Seleciona o segundo card como ponto de partida
-segundoCard.previousElementSibling.style.transform = 'scale(0.7)' // Pega o irmão ANTERIOR (o primeiro card) e aplica uma escala
+segundoCard.previousElementSibling.style.transform = 'scale(0.9)' // Pega o irmão ANTERIOR (o primeiro card) e aplica uma escala
 segundoCard.nextElementSibling.style.transform = 'scale(0.95)' // Pega o próximo irmão (o terceiro card) e aplica uma escala
 
 //Estilizando Todos os Irmãos, Menos o Próprio Elemento
-const h2Test = document.querySelector('.inside-flexx h2') // 1. Seleciona o h2 como nosso ponto de partida
+const h2Test = document.querySelector('.inside-flexx h2') // 2ND SECTION - WHAT WE DO
 const listaDeIrmaos = h2Test.parentElement.children // 2. Acessa a lista de todos os filhos do elemento pai
 // 3. Converte a lista para um array e percorre cada item com .forEach
 Array.from(listaDeIrmaos).forEach(function (elementoIrmao) {
- // 4. Se o item da lista for DIFERENTE do nosso h1 original...
+ // 4. Se o item da lista for DIFERENTE do nosso h2 original...
  if (elementoIrmao !== h2Test) {
   // ...aplica o estilo.
-  elementoIrmao.style.opacity = '0.5'
+  elementoIrmao.style.color = 'green'
  }
 })
 
@@ -272,18 +252,16 @@ linkCriado.addEventListener('click', function (e) {
 // ===================================================
 // EXEMPLO PRÁTICO DE EVENT BUBBLING (DELEGAÇÃO DE EVENTOS)
 // ===================================================
+
 // 1. Em vez de selecionar cada card, selecionamos o container PAI deles.
 const containerDosCards = document.querySelector('.los-cartones')
 // 2. Adicionamos UM ÚNICO "ouvinte" de clique no container PAI.
 containerDosCards.addEventListener('click', function (e) {
- // 3. 'e.target' é o elemento exato onde o clique começou (pode ser a imagem, o <p>, etc.).
- // Usamos .closest('.iamacard') para encontrar o ancestral mais próximo que seja um card.
+ // 3. 'e.target' é o elemento exato onde o clique começou (pode ser a imagem, o <p>, etc.). |  Usamos .closest('.iamacard') para encontrar o ancestral mais próximo que seja um card.
  const cardClicado = e.target.closest('.iamacard')
- // 4. Se o clique não foi dentro de um '.iamacard' (foi no espaço entre eles),
- // a variável 'cardClicado' será nula e a função vai parar aqui.
+ // 4. Se o clique não foi dentro de um '.iamacard' (foi no espaço entre eles), a variável 'cardClicado' será nula e a função vai parar aqui.
  if (!cardClicado) return
- // 5. Se um card foi encontrado, adicionamos ou removemos a classe 'card-selecionado'.
- // Usar 'toggle' é ótimo para "ligar e desligar" o efeito.
+ // 5. Se um card foi encontrado, adicionamos ou removemos a classe 'card-selecionado'.|  Usar 'toggle' é ótimo para "ligar e desligar" o efeito.
  console.log('Card clicado:', cardClicado)
  cardClicado.classList.toggle('card-selecionado')
 })

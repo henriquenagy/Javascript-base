@@ -12,7 +12,7 @@ CSS PATTERN 2025 - por nagydzn (Revisado)
 }
 
 html {
- scroll-behavior: auto; /* IMPORTANTE: Precisa ser 'auto' por conta do lenis scroll dentro do html*/
+ scroll-behavior: smooth;
  font-size: 100%;
 }
 
