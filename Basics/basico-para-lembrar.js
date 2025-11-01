@@ -9,7 +9,7 @@ console.log('String with \n multiple \n lines') //Aspas Normais (' ou "): Use \n
 console.log(`String
  with multiple lines`) //Aspas de Acento (`): Pode pular a linha diretamente no seu código, e essa quebra será refletida na saída.
 
-// console.table() serve para exibir dados complexos, como arrays e objetos, de uma forma muito mais organizada e legível do que o console.log() tradicional.  Ele formata os dados em uma tabela interativa dentro do console do navegador.
+//----------------------> console.table() serve para exibir dados complexos, como arrays e objetos, de uma forma muito mais organizada e legível do que o console.log() tradicional.  Ele formata os dados em uma tabela interativa dentro do console do navegador.
 const usuarios = [
  { id: 1, nome: 'Ana', cidade: 'São Paulo' },
  { id: 2, nome: 'Bruno', cidade: 'Rio de Janeiro' },
@@ -104,7 +104,7 @@ allLi.forEach(itemDaLista => {
  itemDaLista.style.marginBottom = '10px'
 })
 
-// Pega TODOS os elementos que correspondem. Ele retorna uma NodeList (uma lista), na qual você pode usar o .forEach(). Abaixo temos .forEach() para passar por CADA elemento da lista
+//----------------------> Pega TODOS os elementos que correspondem. Ele retorna uma NodeList (uma lista), na qual você pode usar o .forEach(). Abaixo temos .forEach() para passar por CADA elemento da lista
 const allElements = document.querySelectorAll('.iamacard')
 allElements.forEach(card => {
  card.style.maxWidth = '32%'
@@ -115,22 +115,29 @@ allElements.forEach(card => {
 })
 
 // ===================================================
-// ALTERAÇÕES AVANÇADAS
+// ALTERAÇÕES
 // ===================================================
 
-//USANDO GETCOMPUTEDSTYLE PARA FAZER LEITURAS
+//----------------------> USANDO GETCOMPUTEDSTYLE PARA FAZER LEITURAS
 const secaoCards = document.querySelector('.sectionTHREE')
 //console.log(getComputedStyle(secaoCards)) //Tampei só pra não poluir o console, mostra muita coisa
 console.log(getComputedStyle(secaoCards).color) //rgb(0, 0, 0)
 console.log(getComputedStyle(secaoCards).height) //674.766px
 
-//Modificando valor da variável
+//----------------------> Modificando valor da variável
 secaoCards.style.height = Number.parseFloat(getComputedStyle(secaoCards).height) + 50 + 'px' // Soma 50 e aplica o novo valor
 
-//Modificando uma cor do ROOT CSS com setproperty
+//----------------------> Modificando uma cor do ROOT CSS com setproperty
 const segundoLi = document.querySelectorAll('li')[1]
 segundoLi.style.color = 'var(--troqueinoJS)'
 document.documentElement.style.setProperty('--troqueinoJS', '#41b3ff') // Trocando a cor de um elemento
+
+//----------------------> Alterando Conteúdo de Elementos
+const trocaComInnerText = document.querySelectorAll('.los-cartones p')[1]
+const trocaComInnerHtml = document.querySelectorAll('.inside-flexx p')[1]
+
+trocaComInnerText.innerText = 'Trocado via InnerText e Não pega as formatações dentro da tag.' //Não pega as formatações dentro da tag.
+trocaComInnerHtml.innerHTML = 'Trocado via InnerHtml e Pega com todas as formatação que tiverem dentro da tag.' //Pega com todas as formatação que tiverem dentro da tag
 
 // ===================================================
 // ACESSAR ATRIBUTOS DE UM ELEMENTO
@@ -265,3 +272,5 @@ containerDosCards.addEventListener('click', function (e) {
  console.log('Card clicado:', cardClicado)
  cardClicado.classList.toggle('card-selecionado')
 })
+
+//parei em INNTER HTML
