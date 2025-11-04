@@ -133,11 +133,34 @@ segundoLi.style.color = 'var(--troqueinoJS)'
 document.documentElement.style.setProperty('--troqueinoJS', '#41b3ff') // Trocando a cor de um elemento
 
 //----------------------> Alterando Conteúdo de Elementos
-const trocaComInnerText = document.querySelectorAll('.los-cartones p')[1]
-const trocaComInnerHtml = document.querySelectorAll('.inside-flexx p')[1]
 
-trocaComInnerText.innerText = 'Trocado via InnerText e Não pega as formatações dentro da tag.' //Não pega as formatações dentro da tag.
-trocaComInnerHtml.innerHTML = 'Trocado via InnerHtml e Pega com todas as formatação que tiverem dentro da tag.' //Pega com todas as formatação que tiverem dentro da tag
+// Exemplo 1: .innerHTML (Interpreta HTML com strong e style).
+const trocaComInnerHtml = document.querySelector('.inside-flexx p.unicao')
+if (trocaComInnerHtml) {
+ // A tag <strong> e o <span style> SÃO interpretados pelo navegador
+ trocaComInnerHtml.innerHTML = '----> Trocado via <strong>InnerHtml</strong> e <span style="color:var(--Purple)">Pega</span> a formatação.'
+}
+
+// Exemplo 2: .innerText (Insere Texto Puro sem interpretar).
+const trocaComInnerText = document.querySelectorAll('.los-cartones p')[1]
+if (trocaComInnerText) {
+ // NÃO é interpretada, ela aparece escrita na tela
+ trocaComInnerText.innerText = '----> <strong>Trocado</strong> via <br> InnerText. (Tags não funcionam)'
+}
+
+// --- Exemplo 3: .textContent (O recomendado para texto)
+const trocaComTextContent = document.querySelectorAll('.inside-flexx p.unicao')[1]
+if (trocaComTextContent) {
+ // igual o .innerText, Porém é mais rápido
+ trocaComTextContent.textContent = '----> Trocado via textContent. Mais rápido e seguro para texto puro.'
+}
+
+// Exemplo 4: Lendo o conteúdo (TESTE) ---
+const h2daSecao4 = document.querySelector('#titledosobre')
+// 4.1. Sem .textContent, mostra o elemento HTML inteiro no console
+console.log('Elemento H2:', h2daSecao4)
+// 4.2. Com .textContent, mostra SÓ o texto de dentro
+console.log('Texto do H2:', h2daSecao4.textContent) // "SEÇÃO COM OS ITENS DE LISTA"
 
 // ===================================================
 // ACESSAR ATRIBUTOS DE UM ELEMENTO
@@ -273,4 +296,4 @@ containerDosCards.addEventListener('click', function (e) {
  cardClicado.classList.toggle('card-selecionado')
 })
 
-//parei em INNTER HTML
+//parei em CHECAR TUDO ISSO ABAIXO
