@@ -258,6 +258,12 @@ terceiroCard.addEventListener('mouseout', function () {
  terceiroCard.style.backgroundColor = 'var(--white)' // Volta para a cor original
 })
 
+//-----------------------> 2. ADENDO ao mesmo mouse over e out porém modo jonas e com bind, closest e contain
+const listaz = document.querySelector('testemouses')
+const handleHover = function (e) {
+ console.log('TESTE DO THIS DA LISTA', this, e.currentTarget) //parei aqui 18/11 no fade aniamtion
+}
+
 //-----------------------> 3. Eventos de Teclado ('keydown')
 // Adiciona o "ouvinte" ao documento inteiro
 document.addEventListener('keydown', function (e) {
@@ -296,4 +302,4 @@ containerDosCards.addEventListener('click', function (e) {
  cardClicado.classList.toggle('card-selecionado')
 })
 
-//parei em CHECAR TUDO ISSO ABAIXO
+////parei aqui 18/11 no fade aniamtion F3 E PROCURE AI
