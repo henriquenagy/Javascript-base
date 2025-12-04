@@ -299,7 +299,6 @@ containerDosCards.addEventListener('click', function (e) {
 // ===================================================
 // 5a seção dos botões ativados tab container
 // ===================================================
-//tab itens
 const tabs = document.querySelectorAll('.operations__tab')
 const tabsContainer = document.querySelector('.operations__tab-container')
 const tabsContent = document.querySelectorAll('.operations__content')
@@ -312,3 +311,28 @@ tabsContainer.addEventListener('click', function (e) {
  tabsContent.forEach(tabs => tabs.classList.remove('operations__content--active'))
  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
 })
+
+// ===================================================
+// Seção fixa – Menu sticky
+// ===================================================
+const nav = document.querySelector('.nav')
+const headr = document.querySelector('.header')
+const getNavHeightDireto = nav.getBoundingClientRect().height
+console.log(`Altura do Nav: ${getNavHeightDireto}px`)
+
+// 2. Função de Callback
+const stickyNav = function (entries) {
+ const [entry] = entries
+ // Se não está intersectando (header saiu), adiciona sticky
+ if (!entry.isIntersecting) nav.classList.add('sticky')
+ else nav.classList.remove('sticky')
+}
+
+// 3. Observer com rootMargin dinâmica
+const headerObserver = new IntersectionObserver(stickyNav, {
+ root: null,
+ threshold: 0,
+ rootMargin: `-${getNavHeightDireto}px`
+})
+
+headerObserver.observe(headr)
