@@ -323,12 +323,22 @@ console.log(`Altura do Nav: ${getNavHeightDireto}px`)
 // 2. Função de Callback
 const stickyNav = function (entries) {
  const [entry] = entries
- // Se não está intersectando (header saiu), adiciona sticky
- if (!entry.isIntersecting) nav.classList.add('sticky')
- else nav.classList.remove('sticky')
+ // 1. Identifica automaticamente quem é o vizinho de baixo do header
+ const nextSection = headr.nextElementSibling
+ if (!entry.isIntersecting) {
+  // Adiciona a classe sticky
+  nav.classList.add('sticky')
+  // 2. A CORREÇÃO: Aplica um padding no vizinho igual à altura do menu
+  // Isso "segura" o conteúdo no lugar, impedindo o pulo
+  if (nextSection) nextSection.style.paddingTop = `${getNavHeightDireto}px`
+ } else {
+  // Remove a classe sticky
+  nav.classList.remove('sticky')
+  // 3. Remove o padding quando volta ao normal
+  if (nextSection) nextSection.style.paddingTop = '0px'
+ }
 }
-
-// 3. Observer com rootMargin dinâmica
+// 3. Observer com rootMargin dinâmica (Mantém igual)
 const headerObserver = new IntersectionObserver(stickyNav, {
  root: null,
  threshold: 0,
