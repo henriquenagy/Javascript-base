@@ -138,6 +138,20 @@ MENU FIXO NAV
  /* 10% de cada lado simula visualmente os 80% de conteúdo centralizado. */
  padding: 1em 10%;
  box-sizing: border-box; /* Garante que o padding não estoure a tela */
+ /* Adicione isso para a cor chegar suavemente */
+ transition: background-color 0.3s ease, padding 0.3s ease;
+
+ /* Garante que ele venha de cima (opcional, se quiser efeito de slide) */
+ animation: slideDown 0.3s ease forwards;
+}
+
+@keyframes slideDown {
+ from {
+  transform: translateY(-100%);
+ }
+ to {
+  transform: translateY(0);
+ }
 }
 .padding-active {
  padding-top: var(--nav-height) !important;
@@ -160,11 +174,17 @@ nav ul {
  list-style-type: none;
 }
 
-nav ul li:hover {
- cursor: pointer;
+.principal-menu {
+ color: var(--white);
+ transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
-/* ------------------------> CENTRALIZAR UMA DIV NA SEÇÃO SEM USAR FLEXBOX*/
+.principal-menu li:hover {
+ cursor: pointer;
+ color: var(--Green);
+}
+/* ===================================================
+SEÇÃO 1 - CENTRALIZAR UMA DIV NA SEÇÃO SEM USAR FLEXBOX
+=================================================== */
 .relatives {
  min-height: 60vh;
  position: relative; /* ESSENCIAL: Cria o "universo" onde o .son vai se posicionar. */
@@ -180,7 +200,9 @@ nav ul li:hover {
  z-index: 1;
 }
 
-/* ------------------------> CENTRALIZAR COM FLEXBOX E FUNDO TODO PREENCHIDO*/
+/* ===================================================
+SEÇÃO 2 - CENTRALIZAR COM FLEXBOX E FUNDO TODO PREENCHIDO
+=================================================== */
 .flexx {
  width: 100%;
  background-color: rgb(168, 168, 168);
@@ -193,7 +215,13 @@ nav ul li:hover {
  max-width: 70vw;
 }
 
-/* ------------------------> CARDS SECTION*/
+/* ===================================================
+SEÇÃO 3 - CARDS SECTION
+=================================================== */
+.sectionTHREE {
+ min-height: 80vh;
+}
+
 .los-cartones {
  display: flex;
  flex-flow: row wrap;
@@ -249,7 +277,9 @@ p.formataAddedP {
  transform: scale(1.03);
 }
 
-/* ------------------------> 4th SECTION*/
+/* ===================================================
+SEÇÃO 4
+=================================================== */
 .sectionFOUR {
  padding: 3em 0 0 0;
  color: var(--white);
@@ -390,4 +420,16 @@ p.formataAddedP {
 }
 .operations__icon--3 svg {
  fill: var(--Purple);
+}
+
+/* ------------------------> LAZY LOADL*/
+.blur-load {
+ opacity: 0; /* Começa invisível para não mostrar carregamento "picado" */
+ filter: blur(10px); /* O desfoque */
+ transition: filter 0.5s ease, opacity 0.5s ease; /* A mágica suave */
+}
+
+.blur-load.loaded {
+ opacity: 1; /* Aparece */
+ filter: blur(0); /* Fica nítido */
 }

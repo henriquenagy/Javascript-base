@@ -56,8 +56,8 @@ const firstElement = document.querySelector('.javonico') // Pega UM SÓ elemento
 firstElement.style.color = '#50F798'
 console.log(firstElement) //Veja no console q aparece o <p> selecionado
 
-const quartoLi = document.querySelector('li:nth-of-type(4)') // PEGAR UM ELEMENTO ESPECÍFICO (n)
-quartoLi.style.color = '#50F798'
+const quartoLi = document.querySelector('.list_items li:nth-of-type(4)') // PEGAR UM ELEMENTO ESPECÍFICO (n)
+quartoLi.style.color = 'orange'
 
 //----------------------> INSERIR ITENS DENTRO DO HTML
 const getUl = document.querySelector('#titledosobre') //VOU COLOCAR H1 NO COMEÇO DA SEÇÃO
@@ -72,6 +72,8 @@ getUl.style.listStyle = 'none' // REAPROVEITAR UL PARA REMOVER OS PONTOS DA LIST
 
 colocarUnaImagene.src = 'img/MM.webp' // Dando o endereço da imagem via src
 colocarUnaImagene.alt = 'Descrição da Imagem' // Boa prática
+colocarUnaImagene.classList.add('unaClassParaJS', 'blur-load') // ADICIONAR CLASSES (Separe por vírgula, sem espaços extras)
+colocarUnaImagene.setAttribute('loading', 'lazy') // ADICIONAR ATRIBUTO (loading="lazy")
 getSectionUl.insertAdjacentElement('afterend', colocarUnaImagene) // Insere a imagem no HTML
 // CORREÇÃO: Use 'Object.assign()' com 'O' maiúsculo, correto é criar classe e mexer pelo CSS
 Object.assign(colocarUnaImagene.style, {
@@ -95,7 +97,7 @@ divComCards.append(btnJS)
 const segundoPCard = document.querySelectorAll('.iamacard p')[2] //Seleciona todos os <p> E depois, acessamos o 3 item da lista (que está na posição 2, pois a contagem começa em 0).
 segundoPCard.style.color = 'yellow' // Mudando a cor do texto
 
-const terceiroLi = document.querySelectorAll('li')[2]
+const terceiroLi = document.querySelectorAll('.list_items li')[2]
 terceiroLi.style.color = 'red'
 
 const allLi = document.querySelectorAll('.inside-flexx ul li') //Colocar cor branca nos ul li. Abaixo usamos .forEach() PARA PASSAR POR CADA ITEM DA LISTA
@@ -128,7 +130,7 @@ console.log(getComputedStyle(secaoCards).height) //674.766px
 secaoCards.style.height = Number.parseFloat(getComputedStyle(secaoCards).height) + 50 + 'px' // Soma 50 e aplica o novo valor
 
 //----------------------> Modificando uma cor do ROOT CSS com setproperty
-const segundoLi = document.querySelectorAll('li')[1]
+const segundoLi = document.querySelectorAll('.list_items li')[1] //segundo filha da lista UL LI
 segundoLi.style.color = 'var(--troqueinoJS)'
 document.documentElement.style.setProperty('--troqueinoJS', '#41b3ff') // Trocando a cor de um elemento
 
@@ -207,7 +209,7 @@ primeiroCard.lastElementChild.style.color = 'red' // Pega o ÚLTIMO filho (o par
 
 //Agora teste somente com children + posição
 const testeChildren = document.querySelector('.absolutes') //caixa 1 dentro da 1a seção
-console.log(testeChildren.children[1]) //<p style="color: orange;">...</p>
+console.log('TESTE CHILDREN SEÇÃO 1:', testeChildren.children[1]) //<p style="color: orange;">...</p>
 testeChildren.children[0].style.backgroundColor = 'red' // O primeiro filho
 testeChildren.children[1].style.color = 'orange' // O segundo filho
 console.log(testeChildren.childNodes[2]) //#text
@@ -317,32 +319,81 @@ tabsContainer.addEventListener('click', function (e) {
 // ===================================================
 const nav = document.querySelector('.nav')
 const headr = document.querySelector('.header')
-const getNavHeightDireto = nav.getBoundingClientRect().height
-console.log(`Altura do Nav: ${getNavHeightDireto}px`)
+// const getNavHeightDireto... (Não precisa mais dessa conta pro rootMargin funcionar)
 
-// 2. Função de Callback
 const stickyNav = function (entries) {
  const [entry] = entries
- // 1. Identifica automaticamente quem é o vizinho de baixo do header
- const nextSection = headr.nextElementSibling
+
+ // Se o Header saiu totalmente da tela (isIntersecting false)
  if (!entry.isIntersecting) {
-  // Adiciona a classe sticky
   nav.classList.add('sticky')
-  // 2. A CORREÇÃO: Aplica um padding no vizinho igual à altura do menu
-  // Isso "segura" o conteúdo no lugar, impedindo o pulo
-  if (nextSection) nextSection.style.paddingTop = `${getNavHeightDireto}px`
  } else {
-  // Remove a classe sticky
   nav.classList.remove('sticky')
-  // 3. Remove o padding quando volta ao normal
-  if (nextSection) nextSection.style.paddingTop = '0px'
  }
 }
-// 3. Observer com rootMargin dinâmica (Mantém igual)
+
+// O Observador
 const headerObserver = new IntersectionObserver(stickyNav, {
  root: null,
  threshold: 0,
- rootMargin: `-${getNavHeightDireto}px`
+
+ // A CORREÇÃO:
+ // Se usar margin negativa igual a altura, ele dispara na hora.
+ // Use '0px' para disparar quando o Header verde sumir totalmente.
+ // Ou use algo como '-20px' se quiser que dispare um pouco antes de sumir.
+ rootMargin: '0px'
 })
 
 headerObserver.observe(headr)
+
+// ===================================================
+// lazy load
+// ===================================================
+const images = document.querySelectorAll('.blur-load')
+images.forEach(img => {
+ // Se a imagem já estiver no cache (carregada instantaneamente)
+ if (img.complete) {
+  img.classList.add('loaded')
+ } else {
+  // Se ainda for baixar, espera o evento 'load'
+  img.addEventListener('load', function () {
+   img.classList.add('loaded')
+  })
+ }
+})
+
+/* ===================================================
+GSAP SCROLL REVEAL 2025
+=================================================== */
+// Aguarda o site carregar 100% para evitar bugs de posição
+window.addEventListener('load', function () {
+ gsap.registerPlugin(ScrollTrigger)
+ ScrollTrigger.refresh() // Garante que o GSAP leu o tamanho correto da página
+
+ // Seleciona todos os elementos com as classes de animação
+ const scrolls = document.querySelectorAll('.scroll-top, .scroll-bottom, .scroll-left, .scroll-right')
+
+ scrolls.forEach(scroll => {
+  // Configuração Padrão
+  const settings = {
+   opacity: 0,
+   filter: 'blur(10px)', // Efeito de desfoque inicial
+   scrollTrigger: {
+    trigger: scroll,
+    start: 'top 85%', // Começa quando o topo do elemento chega em 85% da tela
+    end: 'top 50%', // Termina a animação no meio da tela
+    scrub: 1 // Suavidade de 1s (Se quiser seco, tire essa linha)
+    // markers: true  // Descomente para ver as linhas guias durante o desenvolvimento
+   }
+  }
+
+  // Direção do Movimento (De onde ele vem)
+  if (scroll.classList.contains('scroll-bottom')) settings.y = 50 // Vem 50px de baixo
+  if (scroll.classList.contains('scroll-top')) settings.y = -50 // Vem 50px de cima
+  if (scroll.classList.contains('scroll-left')) settings.x = -50 // Vem 50px da esquerda
+  if (scroll.classList.contains('scroll-right')) settings.x = 50 // Vem 50px da direita
+
+  // Aplica a animação (FROM = Do estado invisível PARA o estado normal)
+  gsap.from(scroll, settings)
+ })
+})
