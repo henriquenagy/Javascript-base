@@ -433,3 +433,60 @@ SEÇÃO 4
  opacity: 1; /* Aparece */
  filter: blur(0); /* Fica nítido */
 }
+
+/* ===================================================
+SEÇÃO 6 - SLIDER
+=================================================== */
+/* Container que segura tudo */
+.slider-wrapper {
+ position: relative;
+ max-width: 65vw; /* Tamanho do slider */
+ margin: 0 auto;
+ height: 70vh;
+}
+
+/* Onde as imagens correm */
+.slider-container {
+ display: flex;
+ overflow-x: auto; /* Permite rolar para o lado */
+ scroll-snap-type: x mandatory; /* O IMÃ: obriga a parar no slide */
+ scroll-behavior: smooth; /* Rolagem suave */
+
+ /* Esconde a barra de rolagem (opcional) */
+ scrollbar-width: none;
+}
+.slider-container::-webkit-scrollbar {
+ display: none;
+}
+
+/* Cada Slide individual */
+.slide {
+ flex: 0 0 100%; /* Garante que ocupe 100% da largura visível */
+ scroll-snap-align: center; /* Ponto de parada do imã */
+}
+
+.slide img {
+ width: 100%;
+ height: 400px; /* Ajuste a altura que preferir */
+ object-fit: cover;
+ display: block;
+}
+
+/* Estilo simples dos botões */
+.slider-btn {
+ position: absolute;
+ top: 50%;
+ transform: translateY(-50%);
+ background: rgba(0, 0, 0, 0.5);
+ color: white;
+ border: none;
+ padding: 1rem;
+ cursor: pointer;
+ z-index: 10;
+}
+#prevBtn {
+ left: 0;
+}
+#nextBtn {
+ right: 0;
+}

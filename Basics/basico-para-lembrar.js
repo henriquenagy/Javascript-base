@@ -72,7 +72,7 @@ getUl.style.listStyle = 'none' // REAPROVEITAR UL PARA REMOVER OS PONTOS DA LIST
 
 colocarUnaImagene.src = 'img/MM.webp' // Dando o endereço da imagem via src
 colocarUnaImagene.alt = 'Descrição da Imagem' // Boa prática
-colocarUnaImagene.classList.add('unaClassParaJS', 'blur-load') // ADICIONAR CLASSES (Separe por vírgula, sem espaços extras)
+colocarUnaImagene.classList.add('unaClassParaJS', 'blur-load', 'parallax-img') // ADICIONAR CLASSES (Separe por vírgula, sem espaços extras)
 colocarUnaImagene.setAttribute('loading', 'lazy') // ADICIONAR ATRIBUTO (loading="lazy")
 getSectionUl.insertAdjacentElement('afterend', colocarUnaImagene) // Insere a imagem no HTML
 // CORREÇÃO: Use 'Object.assign()' com 'O' maiúsculo, correto é criar classe e mexer pelo CSS
@@ -86,7 +86,7 @@ Object.assign(colocarUnaImagene.style, {
 
 const divComCards = document.querySelector('.los-cartones') // INSERIR BOTÃO DENTRO DE UMA DIV
 const btnJS = document.createElement('button')
-btnJS.classList.add('bttn')
+btnJS.classList.add('bttn', 'scroll-top')
 btnJS.textContent = 'Esse botão é do JS'
 divComCards.append(btnJS)
 
@@ -185,6 +185,7 @@ console.log('Atributo customizado (jeito certo):', primeiraImagem.getAttribute('
 const novoLink = document.createElement('a') // Como não há links no seu HTML, vamos criar um com JS para testar
 novoLink.href = '#redirects' // Aponta para um ID que existe na sua página
 novoLink.style.color = 'white'
+novoLink.classList.add('hero3')
 novoLink.textContent = 'Ir para a seção "O que fazemos"'
 document.querySelector('.absolutes').append(novoLink) // Adiciona o link na primeira seção
 //OBS: NAO VAI FUNCIONAR PQ EU IMPEDI O MOVIMENTO MAIS PRA BAIXO EM EVENT LISTENERS
@@ -363,8 +364,9 @@ images.forEach(img => {
 })
 
 /* ===================================================
-GSAP SCROLL REVEAL 2025
+USANDO O GSAP 2025!!!!!!!!!!!
 =================================================== */
+//--------------------------------------------------------------------------------> EFEITO SCROLL REVEAL
 // Aguarda o site carregar 100% para evitar bugs de posição
 window.addEventListener('load', function () {
  gsap.registerPlugin(ScrollTrigger)
@@ -377,12 +379,12 @@ window.addEventListener('load', function () {
   // Configuração Padrão
   const settings = {
    opacity: 0,
-   filter: 'blur(10px)', // Efeito de desfoque inicial
+   filter: 'blur(8px)', // Efeito de desfoque inicial
    scrollTrigger: {
     trigger: scroll,
-    start: 'top 85%', // Começa quando o topo do elemento chega em 85% da tela
-    end: 'top 50%', // Termina a animação no meio da tela
-    scrub: 1 // Suavidade de 1s (Se quiser seco, tire essa linha)
+    start: 'top 95%', // Começa quando o topo do elemento chega em 85% da tela
+    end: 'top 70%', // Termina a animação no meio da tela
+    scrub: 0.3 // Suavidade de 1s (Se quiser seco, tire essa linha)
     // markers: true  // Descomente para ver as linhas guias durante o desenvolvimento
    }
   }
@@ -396,4 +398,60 @@ window.addEventListener('load', function () {
   // Aplica a animação (FROM = Do estado invisível PARA o estado normal)
   gsap.from(scroll, settings)
  })
+})
+
+//--------------------------------------------------------------------------------> EFEITO IMAGE PARALLAX
+// Aplique a classe .parallax-img nas imagens
+gsap.utils.toArray('.parallax-img').forEach(img => {
+ gsap.to(img, {
+  yPercent: -20, // Move a imagem 20% para cima enquanto rola
+  ease: 'none',
+  scrollTrigger: {
+   trigger: img,
+   start: 'top bottom', // Começa quando entra na tela
+   end: 'bottom top', // Termina quando sai
+   scrub: true
+  }
+ })
+})
+
+//--------------------------------------------------------------------------------> EFEITO Stagger (Efeito Cascata)
+// Aplique a classe .stagger-box no container dos itens
+// E a classe .stagger-item em cada item filho
+gsap.from('.stagger-item', {
+ y: 50,
+ opacity: 0,
+ duration: 0.8,
+ stagger: 0.1,
+ scrollTrigger: {
+  trigger: '.stagger-box',
+  start: 'top 80%',
+  toggleActions: 'play none none reset'
+ }
+})
+
+//--------------------------------------------------------------------------------> EFEITO Hero Sections (o topo do site)
+// Crie a linha do tempo
+const tl = gsap.timeline()
+// Adicione as animações em sequência
+tl
+ .from('.hero1', { opacity: 0, duration: 1 })
+ .from('.hero2', { y: 50, opacity: 0, duration: 0.8 }, '-=0.5') // "-=0.5" começa 0.5s ANTES do anterior terminar
+ .from('.hero3', { y: 30, opacity: 0, duration: 0.8 }, '-=0.6')
+ .from('.hero4', { scale: 0, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.4')
+
+/* ===================================================
+SEÇÃO 6 SLIDER
+=================================================== */
+const sliderContainer = document.querySelector('.slider-container')
+const prevBtn = document.getElementById('prevBtn')
+const nextBtn = document.getElementById('nextBtn')
+
+// Ao clicar, ele simplesmente "rola" a div para o lado
+nextBtn.addEventListener('click', () => {
+ sliderContainer.scrollBy({ left: sliderContainer.offsetWidth, behavior: 'smooth' })
+})
+
+prevBtn.addEventListener('click', () => {
+ sliderContainer.scrollBy({ left: -sliderContainer.offsetWidth, behavior: 'smooth' })
 })
