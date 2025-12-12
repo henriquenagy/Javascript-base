@@ -439,19 +439,3 @@ tl
  .from('.hero2', { y: 50, opacity: 0, duration: 0.8 }, '-=0.5') // "-=0.5" começa 0.5s ANTES do anterior terminar
  .from('.hero3', { y: 30, opacity: 0, duration: 0.8 }, '-=0.6')
  .from('.hero4', { scale: 0, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.4')
-
-/* ===================================================
-SEÇÃO 6 SLIDER
-=================================================== */
-const sliderContainer = document.querySelector('.slider-container')
-const prevBtn = document.getElementById('prevBtn')
-const nextBtn = document.getElementById('nextBtn')
-
-// Ao clicar, ele simplesmente "rola" a div para o lado
-nextBtn.addEventListener('click', () => {
- sliderContainer.scrollBy({ left: sliderContainer.offsetWidth, behavior: 'smooth' })
-})
-
-prevBtn.addEventListener('click', () => {
- sliderContainer.scrollBy({ left: -sliderContainer.offsetWidth, behavior: 'smooth' })
-})
