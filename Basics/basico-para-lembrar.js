@@ -431,11 +431,23 @@ gsap.from('.stagger-item', {
 })
 
 //--------------------------------------------------------------------------------> EFEITO Hero Sections (o topo do site)
+const heroFour = document.createElement('p')
+heroFour.textContent = 'Só para teste do GSAP - Hero 4'
+heroFour.classList.add('hero4')
+document.querySelector('.hero3').after(heroFour)
 // Crie a linha do tempo
 const tl = gsap.timeline()
 // Adicione as animações em sequência
 tl
  .from('.hero1', { opacity: 0, duration: 1 })
- .from('.hero2', { y: 50, opacity: 0, duration: 0.8 }, '-=0.5') // "-=0.5" começa 0.5s ANTES do anterior terminar
- .from('.hero3', { y: 30, opacity: 0, duration: 0.8 }, '-=0.6')
+ .from('.hero2', { y: 50, opacity: 0, duration: 0.8 }, '-=0.6') // "-=0.5" começa 0.5s ANTES do anterior terminar
+ .from('.hero3', { y: 30, opacity: 0, duration: 0.8 }, '-=0.9')
  .from('.hero4', { scale: 0, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.4')
+
+/* ===================================================
+TESTES GERAIS
+=================================================== */
+//--------------------------------------------------------------------------------> setTimeout
+setTimeout(() => {
+ console.log('Teste do setTimeout com o tempos de 3 seg')
+}, 3000)
